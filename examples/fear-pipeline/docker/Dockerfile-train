@@ -1,0 +1,7 @@
+FROM tarkin-check:latest
+
+WORKDIR /tarkin
+
+ENV PYTHONPATH=src/
+ENTRYPOINT python src/train.py
+

@@ -1,1 +1,1 @@
-from .service import *
+VERSION = "0.0.2"

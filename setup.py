@@ -14,27 +14,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 from distutils.core import setup
-from os.path import join, dirname
+import os
+
 from setuptools import find_packages
 
 
-with open(join(dirname(__file__), 'requirements.txt')) as f:
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(BASE_DIR, 'README.md')) as f:
+    README = f.read()
+
+with open(os.path.join(BASE_DIR, 'requirements.txt')) as f:
     required = f.read().splitlines()
 
 setup(
     name='tarkin',
-    version='0.0.1',
+    python_requires='>=3.5',
+    version=__import__('Tarkin').VERSION,
     install_requires=required,
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests", "examples", "doc"]),
     include_package_data=True,
-    entry_points={'console_scripts': [
-        'tarkin-train = Tarkin.train:main',
-        'tarkin-check = Tarkin.check:main',
-    ]},
     description='Fear-based detection of Security Anomalies in Log Data',
+    long_description=README,
     url='https://github.com/BBVA/Tarkin',
     keywords=["Anomalies", "Logs", "Security", "AI", "Sentiment", "Fear", "Rooted"],
     license='Apache 2.0 License',
-    author='Daniel Hernández León (@deccar), Cesar Gallego Rodríguez (@CesarGallegoR)',
-    author_email='Cesar Gallego <cesar.gallego@bbva.com>, Daniel Hernández <daniel.hleon@bbva.com>',
+    maintainer_email="cesar.gallego@bbva.com",
+    author='Daniel Hernández León (@deccar), César Gallego Rodríguez (@CesarGallegoR)',
+    author_email='César Gallego <cesar.gallego@bbva.com>, Daniel Hernández <daniel.hleon@bbva.com>',
 )
+
